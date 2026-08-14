@@ -26,6 +26,7 @@ export default function Home() {
       <header className="home-header">
         <h1 className="home-title">Fragments</h1>
         <p className="home-subtitle">
+          <TypewriterText text="of something that has been filed by hands" />
         </p>
 
         <div className="lookup-slip">
