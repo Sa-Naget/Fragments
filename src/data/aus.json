@@ -5,7 +5,16 @@
     "title": "What Ifs",
     "description": "A snippet of what life would be like if the characters didn't die.",
     "coverImage": null,
-    "characterIds": ["starlight-regal"],
+    "characterIds": ["starlight-regal", "harvey-viper"], 
     "posts": ["what-ifs-post-1", "what-ifs-post-2"]
+  },
+  {
+    "id": "2",
+    "slug": "original-universe",
+    "title": "Univa",
+    "description": "Recorded by Muti and Petrofa. Pre-Recorded by Acrest and Colpa",
+    "coverImage": null,
+    "characterIds": ["starlight-regal", "harvey-viper"],
+    "posts": ["original-universe-post-1", "original-universe-post-2"]
   }
 ]
