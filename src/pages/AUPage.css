@@ -1,0 +1,131 @@
+.au-page {
+  min-height: 100vh;
+  padding: var(--space-lg) var(--space-md);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.back-link {
+  font-family: var(--font-label);
+  font-size: 0.85rem;
+  color: var(--accent-gold);
+  display: inline-block;
+  margin-bottom: var(--space-lg);
+}
+
+.au-header {
+  margin-bottom: var(--space-lg);
+}
+
+.au-label {
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  opacity: 0.6;
+  letter-spacing: 1px;
+}
+
+.au-title {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  color: var(--accent-gold);
+  margin: var(--space-xs) 0;
+}
+
+.au-description {
+  opacity: 0.85;
+  line-height: 1.5;
+  max-width: 60ch;
+}
+
+.au-characters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+}
+
+.au-character-chip {
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  padding: 3px 10px;
+  border-radius: 20px;
+  transition: var(--transition-theme);
+}
+
+.corkboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-lg) var(--space-md);
+  padding-top: var(--space-md);
+}
+
+@keyframes pinDrop {
+  from { opacity: 0; transform: translateY(-16px) rotate(var(--rot, 0deg)); }
+  to { opacity: 1; transform: translateY(0) rotate(var(--rot, 0deg)); }
+}
+
+.pinned-post {
+  position: relative;
+  background: var(--surface);
+  color: var(--text-on-light);
+  padding: var(--space-md) var(--space-sm) var(--space-sm);
+  border-radius: 2px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  transition: var(--transition-theme), transform 0.2s ease;
+  transform: rotate(var(--rot, 0deg));
+  animation: pinDrop 0.5s ease backwards;
+  animation-delay: calc(var(--i, 0) * 80ms);
+}
+
+.pin {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-rose);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.35);
+}
+
+.pinned-post-date {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  opacity: 0.6;
+  margin-bottom: var(--space-xs);
+}
+
+.pinned-post-content {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.pinned-post-type {
+  display: inline-block;
+  margin-top: var(--space-sm);
+  font-family: var(--font-label);
+  font-size: 0.6rem;
+  opacity: 0.5;
+  text-transform: uppercase;
+}
+
+.read-more-link {
+  color: var(--accent-gold);
+  border-bottom: 1px solid var(--accent-gold);
+  padding-bottom: 1px;
+  white-space: nowrap;
+}
+
+.read-more-link:hover {
+  opacity: 0.8;
+}
+
+.corkboard-empty,
+.au-page-notfound {
+  opacity: 0.6;
+  font-style: italic;
+}

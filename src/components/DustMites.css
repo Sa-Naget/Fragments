@@ -1,0 +1,42 @@
+.dust-motes {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.dust-mote {
+  position: absolute;
+  top: 100%;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  opacity: 0;
+  filter: blur(0.5px);
+  animation-name: moteFloat;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes moteFloat {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.5;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-110vh) translateX(var(--drift, 0px));
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dust-motes {
+    display: none;
+  }
+}

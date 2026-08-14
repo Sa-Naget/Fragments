@@ -1,0 +1,24 @@
+[
+  {
+    "id": "1",
+    "slug": "starlight-regal",
+    "name": "Star Light Regal",
+    "shortBio": "Usually called Star. The oldest son of Columbus Regal (father) and Rosetta Athe (mother). Has a surprisingly close relationship with Harvey Viper.",
+    "tags": ["10G", "bright", "cheerful", "responsible", "main character"],
+    "avatar": null,
+    "aus": ["what-ifs-au"],
+    "generation": "10",
+    "fateNumber": "10001",
+    "familyName": "Regal",
+    "branding": "Viper's",
+    "age": "23",
+    "hairColor": "Lapis Blue",
+    "highlight": "Branding",
+    "eyeColor": "Unknown",
+    "height": "184 cm",
+    "birthplace": "Village of Reksana",
+    "currentResidence": "Pyha Mountain",
+    "skills": ["Eyes of the Sun", "Eyes of the Moon"],
+    "tools": ["Gate Target"]
+  }
+]

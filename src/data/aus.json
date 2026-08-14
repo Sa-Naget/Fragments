@@ -1,0 +1,11 @@
+[
+  {
+    "id": "1",
+    "slug": "what-ifs-au",
+    "title": "What Ifs",
+    "description": "A snippet of what life would be like if the characters didn't die.",
+    "coverImage": null,
+    "characterIds": ["starlight-regal"],
+    "posts": ["what-ifs-post-1", "what-ifs-post-2"]
+  }
+]

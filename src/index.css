@@ -1,0 +1,114 @@
+/* Shared tokens — same in both themes */
+:root {
+  --font-display: 'Fraunces', serif;
+  --font-label: 'Special Elite', monospace;
+  --font-body: 'Newsreader', serif;
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 8rem;
+
+  --transition-theme: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease;
+
+  --ink: #241B12;
+}
+
+/* Morning — Sunlit Abandoned Library */
+[data-theme='morning'] {
+  --bg: #F0E6D2;
+  --surface: #FAF3E4;
+  --surface-muted: #E3CBA8;
+  --accent-gold: #E8B85C;
+  --accent-rose: #D9A490;
+  --accent-moss: #8A9678;
+  --text-on-dark: #3B2A1D;
+  --text-on-light: #3B2A1D;
+  --texture-tint: 90, 60, 20;
+  --texture-blend: multiply;
+}
+
+[data-theme='night'] {
+  --bg: #1A140F;
+  --surface: #2E2115;
+  --surface-muted: #251A10;
+  --accent-gold: #F0B85C;
+  --accent-rose: #C99485;
+  --accent-moss: #6B7A5B;
+  --text-on-dark: #D9CBAE;
+  --text-on-light: #EDE2C4;
+  --texture-tint: 232, 184, 92;
+  --texture-blend: overlay;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-on-dark);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  transition: var(--transition-theme);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pageFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.page-transition.fade-in {
+  animation: pageFadeIn 0.2s ease;
+}
+
+.page-transition.fade-out {
+  animation: pageFadeOut 0.2s ease;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.5;
+  mix-blend-mode: var(--texture-blend, multiply);
+  background-image:=
+    repeating-linear-gradient(
+      90deg,
+      rgba(var(--texture-tint), 0.05) 0px,
+      rgba(var(--texture-tint), 0.05) 1px,
+      transparent 1px,
+      transparent 5px
+    ),
+    radial-gradient(ellipse at 15% 20%, rgba(var(--texture-tint), 0.1), transparent 45%),
+    radial-gradient(ellipse at 80% 65%, rgba(var(--texture-tint), 0.09), transparent 40%),
+    radial-gradient(ellipse at 50% 90%, rgba(var(--texture-tint), 0.08), transparent 50%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
