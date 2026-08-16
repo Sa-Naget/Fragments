@@ -1,10 +1,11 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import ThemeToggle from './components/ThemeToggle';
+import DustMites from './components/DustMites.jsx';
+import Landing from './pages/Landing';
 import Home from './pages/Home';
 import CharacterPage from './pages/CharacterPage';
 import AUPage from './pages/AUPage';
-import DustMites from './components/DustMites.jsx';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -25,7 +26,8 @@ function AnimatedRoutes() {
   return (
     <div className={`page-transition ${transitionStage}`} onAnimationEnd={handleAnimationEnd}>
       <Routes location={displayLocation}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/archive" element={<Home />} />
         <Route path="/character/:slug" element={<CharacterPage />} />
         <Route path="/au/:slug" element={<AUPage />} />
       </Routes>

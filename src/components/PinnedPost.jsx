@@ -46,11 +46,11 @@ export default function PinnedPost({ post, rotation, index }) {
       <p className="pinned-post-date">{post.date}</p>
       <p className="pinned-post-content">
         {preview}
-        {post.sourceLink && (
+        {post.source_Link && (
           <span className="read-more-wrap">
             {' '}
             <a
-              href={post.sourceLink}
+              href={post.source_Link}
               target="_blank"
               rel="noopener noreferrer"
               className="read-more-link"

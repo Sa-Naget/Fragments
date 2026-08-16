@@ -7,8 +7,8 @@ const MAX_TILT = 10; // degrees
 const RECORD_FIELDS = [
   { key: 'generation', label: 'Generation' },
   { key: 'status', label: 'Status' },
-  { key: 'fateNumber', label: 'Fate Number' },
-  { key: 'familyName', label: 'Family Name' },
+  { key: 'fate_number', label: 'Fate Number' },
+  { key: 'family_name', label: 'Family Name' },
   { key: 'branding', label: 'Branding' },
 ];
 

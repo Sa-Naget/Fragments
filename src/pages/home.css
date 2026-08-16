@@ -197,3 +197,12 @@
   opacity: 0.5;
   letter-spacing: 0.5px;
 }
+
+.loading-message,
+.error-message {
+  text-align: center;
+  font-family: var(--font-label);
+  font-size: 0.85rem;
+  opacity: 0.6;
+  padding: var(--space-lg) 0;
+}

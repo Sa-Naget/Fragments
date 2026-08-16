@@ -1,14 +1,42 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TypewriterText from '../components/TypewriterText.jsx';
 import CharacterCard from '../components/CharacterCard.jsx';
 import { jitterFor } from '../utils/jitter';
-import characters from '../data/characters.json';
-import aus from '../data/aus.json';
-import posts from '../data/posts.json';
+import { supabase } from '../lib/supabaseClient';
 import './home.css';
 
 export default function Home() {
   const [query, setQuery] = useState('');
+  const [characters, setCharacters] = useState([]);
+  const [stats, setStats] = useState({ characters: 0, aus: 0, posts: 0 });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function loadData() {
+      const [charactersResult, ausResult, postsResult] = await Promise.all([
+        supabase.from('characters').select('*').order('created_at'),
+        supabase.from('aus').select('*', { count: 'exact', head: true }),
+        supabase.from('posts').select('*', { count: 'exact', head: true }),
+      ]);
+
+      if (charactersResult.error) {
+        setError(charactersResult.error.message);
+        setLoading(false);
+        return;
+      }
+
+      setCharacters(charactersResult.data);
+      setStats({
+        characters: charactersResult.data.length,
+        aus: ausResult.count ?? 0,
+        posts: postsResult.count ?? 0,
+      });
+      setLoading(false);
+    }
+
+    loadData();
+  }, []);
 
   const normalizedQuery = query.trim().toLowerCase();
 
@@ -42,28 +70,36 @@ export default function Home() {
         </div>
       </header>
 
-      <div className="character-grid">
-        {filteredCharacters.length > 0 ? (
-          filteredCharacters.map((char, i) => (
-            <CharacterCard
-              key={char.slug}
-              character={char}
-              index={i}
-              rotation={jitterFor(i)}
-            />
-          ))
-        ) : (
-          <p className="no-results">No records match that search.</p>
-        )}
-      </div>
+      {loading && <p className="loading-message">Retrieving records…</p>}
 
-      <footer className="archive-stats">
-        {characters.length} character{characters.length !== 1 ? 's' : ''} filed
-        {' · '}
-        {aus.length} folder{aus.length !== 1 ? 's' : ''}
-        {' · '}
-        {posts.length} entr{posts.length !== 1 ? 'ies' : 'y'} pinned
-      </footer>
+      {error && <p className="error-message">The archive couldn't be reached: {error}</p>}
+
+      {!loading && !error && (
+        <>
+          <div className="character-grid">
+            {filteredCharacters.length > 0 ? (
+              filteredCharacters.map((char, i) => (
+                <CharacterCard
+                  key={char.slug}
+                  character={char}
+                  index={i}
+                  rotation={jitterFor(i)}
+                />
+              ))
+            ) : (
+              <p className="no-results">No records match that search.</p>
+            )}
+          </div>
+
+          <footer className="archive-stats">
+            {stats.characters} character{stats.characters !== 1 ? 's' : ''} filed
+            {' · '}
+            {stats.aus} folder{stats.aus !== 1 ? 's' : ''}
+            {' · '}
+            {stats.posts} entr{stats.posts !== 1 ? 'ies' : 'y'} pinned
+          </footer>
+        </>
+      )}
     </div>
   );
 }

@@ -229,3 +229,15 @@
   opacity: 0.6;
   font-style: italic;
 }
+
+.loading-message,
+.error-message {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-label);
+  font-size: 0.85rem;
+  opacity: 0.6;
+  text-align: center;
+}
