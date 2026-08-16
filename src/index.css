@@ -99,7 +99,7 @@ body::after {
   z-index: 999;
   opacity: 0.5;
   mix-blend-mode: var(--texture-blend, multiply);
-  background-image:=
+  background-image:
     repeating-linear-gradient(
       90deg,
       rgba(var(--texture-tint), 0.05) 0px,
