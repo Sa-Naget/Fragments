@@ -1,0 +1,108 @@
+.admin-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+}
+
+.admin-login-form {
+  width: 100%;
+  max-width: 340px;
+}
+
+.admin-login-label {
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.6;
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
+.admin-login-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: var(--space-lg);
+  color: var(--text-on-dark);
+}
+
+.admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: var(--space-md);
+}
+
+.admin-field span {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.65;
+  color: var(--text-on-dark);
+}
+
+.admin-field input {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: var(--space-xs) var(--space-sm);
+  border: none;
+  border-bottom: 1px solid var(--text-on-dark);
+  background: transparent;
+  color: var(--text-on-dark);
+  opacity: 0.8;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.admin-field input:focus {
+  outline: none;
+  opacity: 1;
+  border-bottom-color: var(--accent-gold);
+}
+
+.admin-field input::placeholder {
+  opacity: 0.4;
+}
+
+.admin-error {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  color: #c55;
+  text-align: center;
+  margin: var(--space-sm) 0 var(--space-md);
+}
+
+.admin-submit {
+  width: 100%;
+  margin-top: var(--space-lg);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  background: transparent;
+  color: var(--text-on-dark);
+  border: 1px solid var(--text-on-dark);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-submit:hover:not(:disabled) {
+  background: var(--text-on-dark);
+  color: var(--bg);
+}
+
+.admin-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.admin-hint {
+  font-family: var(--font-label);
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: var(--space-lg);
+  opacity: 0.45;
+  line-height: 1.5;
+}

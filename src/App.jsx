@@ -1,11 +1,14 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import ThemeToggle from './components/ThemeToggle';
+import ThemeToggle from './components/ThemeToggle.jsx';
 import DustMites from './components/DustMites.jsx';
-import Landing from './pages/Landing';
-import Home from './pages/Home';
-import CharacterPage from './pages/CharacterPage';
-import AUPage from './pages/AUPage';
+import { AuthProvider } from './lib/AuthContent.jsx';
+import Landing from './pages/Landing.jsx';
+import Home from './pages/home.jsx';
+import CharacterPage from './pages/CharacterPage.jsx';
+import AUPage from './pages/AUPage.jsx';
+import AdminLogin from './pages/AdminLogin.jsx';
+import AdminDashboard from './pages/AdminDashboard.jsx';
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -30,6 +33,8 @@ function AnimatedRoutes() {
         <Route path="/archive" element={<Home />} />
         <Route path="/character/:slug" element={<CharacterPage />} />
         <Route path="/au/:slug" element={<AUPage />} />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
       </Routes>
     </div>
   );
@@ -37,11 +42,13 @@ function AnimatedRoutes() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <ThemeToggle />
-      <DustMites />
-      <AnimatedRoutes />
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <ThemeToggle />
+        <DustMites />
+        <AnimatedRoutes />
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
