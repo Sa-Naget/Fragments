@@ -52,10 +52,7 @@ export default function Home() {
   return (
     <div className="home">
       <header className="home-header">
-        <h1 className="home-title">Fragments</h1>
-        <p className="home-subtitle">
-          <TypewriterText text="of something that has been filed by hands" />
-        </p>
+        <h1 className="home-title"><TypewriterText text="Welcome to Archiva" /> </h1>
 
         <div className="lookup-slip">
           <label htmlFor="lookup" className="lookup-label">Lookup</label>
@@ -72,7 +69,7 @@ export default function Home() {
 
       {loading && <p className="loading-message">Retrieving records…</p>}
 
-      {error && <p className="error-message">The archive couldn't be reached: {error}</p>}
+      {error && <p className="error-message">I'm sorry, it seems like I can't reach the archive. Ask Sabichka about {error}</p>}
 
       {!loading && !error && (
         <>
