@@ -168,8 +168,8 @@ export default function PostTab() {
       </div>
 
       {posts.length > 0 ? (
-        <div style={{ border: '1px solid var(--border)', borderRadius: '4px', overflow: 'hidden' }}>
-          <div style={{
+        <div className="admin-table-shell">
+          <div className="admin-table-grid admin-table-grid--posts" style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr 1fr 1fr auto',
             gap: '1rem',
@@ -192,6 +192,7 @@ export default function PostTab() {
             return (
               <div
                 key={post.id}
+                className="admin-table-grid admin-table-grid--posts"
                 style={{
                   display: 'grid',
                   gridTemplateColumns: '1fr 1fr 1fr 1fr auto',

@@ -156,8 +156,8 @@ useEffect(() => {
       </div>
 
       {aus.length > 0 ? (
-        <div style={{ border: '1px solid var(--border)', borderRadius: '4px', overflow: 'hidden' }}>
-          <div style={{
+        <div className="admin-table-shell">
+          <div className="admin-table-grid admin-table-grid--aus" style={{
             display: 'grid',
             gridTemplateColumns: '2fr 1fr 2fr auto',
             gap: '1rem',
@@ -177,6 +177,7 @@ useEffect(() => {
           {aus.map((au) => (
             <div
               key={au.id}
+              className="admin-table-grid admin-table-grid--aus"
               style={{
                 display: 'grid',
                 gridTemplateColumns: '2fr 1fr 2fr auto',

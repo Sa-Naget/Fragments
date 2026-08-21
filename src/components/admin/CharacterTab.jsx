@@ -164,9 +164,9 @@ export default function CharacterTab() {
 
       {/* Characters table */}
       {characters.length > 0 ? (
-        <div style={{ border: '1px solid var(--border)', borderRadius: '4px', overflow: 'hidden' }}>
+        <div className="admin-table-shell">
           {/* Table header */}
-          <div style={{
+          <div className="admin-table-grid admin-table-grid--characters" style={{
             display: 'grid',
             gridTemplateColumns: '60px 2fr 1fr 1fr auto',
             gap: '1rem',
@@ -188,6 +188,7 @@ export default function CharacterTab() {
           {characters.map((char) => (
             <div
               key={char.id}
+              className="admin-table-grid admin-table-grid--characters"
               style={{
                 display: 'grid',
                 gridTemplateColumns: '60px 2fr 1fr 1fr auto',
