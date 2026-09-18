@@ -67,9 +67,9 @@ export default function Home() {
         </div>
       </header>
 
-      {loading && <p className="loading-message">Retrieving records…</p>}
+      {loading && <p className="loading-message">Retrieving records from Muti ...</p>}
 
-      {error && <p className="error-message">I'm sorry, it seems like I can't reach the archive. Ask Sabichka about {error}</p>}
+      {error && <p className="error-message">I'm sorry, it seems like I can't reach the archive. Ask Sabichka about " {error} "</p>}
 
       {!loading && !error && (
         <>

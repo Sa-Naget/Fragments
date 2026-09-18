@@ -137,8 +137,8 @@ useEffect(() => {
         <button
           onClick={openAddModal}
           style={{
-            background: 'var(--text-primary)',
-            color: 'var(--surface-2)',
+            background: 'var(--text-on-dark)',
+            color: 'var(--surface)',
             border: 'none',
             width: '32px',
             height: '32px',
@@ -162,7 +162,7 @@ useEffect(() => {
             gridTemplateColumns: '2fr 1fr 2fr auto',
             gap: '1rem',
             padding: '1rem',
-            background: 'var(--surface-1)',
+            background: 'var(--surface-muted)',
             borderBottom: '1px solid var(--border)',
             fontSize: '0.85rem',
             fontWeight: '500',
@@ -207,7 +207,7 @@ useEffect(() => {
                     borderRadius: '2px',
                     fontSize: '0.8rem',
                     cursor: 'pointer',
-                    color: 'var(--text-primary)',
+                    color: 'var(--text-on-dark)',
                   }}
                 >
                   Edit

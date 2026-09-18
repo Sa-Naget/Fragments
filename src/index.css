@@ -25,6 +25,7 @@
   --accent-moss: #8A9678;
   --text-on-dark: #3B2A1D;
   --text-on-light: #3B2A1D;
+  --border: color-mix(in srgb, var(--text-on-dark) 20%, transparent);
   --texture-tint: 90, 60, 20;
   --texture-blend: multiply;
 }
@@ -38,6 +39,7 @@
   --accent-moss: #6B7A5B;
   --text-on-dark: #D9CBAE;
   --text-on-light: #EDE2C4;
+  --border: color-mix(in srgb, var(--text-on-dark) 20%, transparent);
   --texture-tint: 232, 184, 92;
   --texture-blend: overlay;
 }

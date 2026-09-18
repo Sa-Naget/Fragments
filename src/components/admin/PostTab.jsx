@@ -149,8 +149,8 @@ export default function PostTab() {
         <button
           onClick={openAddModal}
           style={{
-            background: 'var(--text-primary)',
-            color: 'var(--surface-2)',
+            background: 'var(--text-on-dark)',
+            color: 'var(--surface)',
             border: 'none',
             width: '32px',
             height: '32px',
@@ -174,7 +174,7 @@ export default function PostTab() {
             gridTemplateColumns: '1fr 1fr 1fr 1fr auto',
             gap: '1rem',
             padding: '1rem',
-            background: 'var(--surface-1)',
+            background: 'var(--surface-muted)',
             borderBottom: '1px solid var(--border)',
             fontSize: '0.85rem',
             fontWeight: '500',
@@ -216,7 +216,7 @@ export default function PostTab() {
                       borderRadius: '2px',
                       fontSize: '0.8rem',
                       cursor: 'pointer',
-                      color: 'var(--text-primary)',
+                      color: 'var(--text-on-dark)',
                     }}
                   >
                     Edit

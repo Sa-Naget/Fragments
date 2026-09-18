@@ -1,17 +1,23 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
+import './AdminFormModal.css';
 
-export default function AdminFormModal({ 
-  isOpen, 
-  onClose, 
-  title, 
-  fields, 
-  formData, 
-  setFormData, 
-  onSubmit, 
-  isSubmitting, 
+export default function AdminFormModal({
+  isOpen,
+  onClose,
+  title,
+  fields,
+  formData,
+  setFormData,
+  onSubmit,
+  isSubmitting,
   error,
-  submitButtonText = 'Add'
+  submitButtonText = 'Add',
 }) {
+  // Tracks the in-progress typed value for each tag-style field,
+  // keyed by field name (e.g. { tags: 'bright', skills: '' })
+  const [tagDrafts, setTagDrafts] = useState({});
+
   // Close modal on Escape key
   useEffect(() => {
     const handleEscape = (e) => {
@@ -29,143 +35,193 @@ export default function AdminFormModal({
     if (e.target === e.currentTarget) onClose();
   };
 
-  return (
-    <div
-      onClick={handleOverlayClick}
-      style={{
-        position: 'fixed',
-        inset: 0,
-        background: 'rgba(0, 0, 0, 0.3)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 1000,
-      }}
-    >
-      <form
-        onSubmit={onSubmit}
-        style={{
-          background: 'var(--surface)',
-          padding: '2rem',
-          borderRadius: '4px',
-          width: '100%',
-          maxWidth: '340px',
-          boxShadow: '0 12px 32px rgba(0, 0, 0, 0.25)',
-        }}
-      >
-        <p style={{
-          fontFamily: 'var(--font-label)',
-          fontSize: '0.7rem',
-          letterSpacing: '2px',
-          textTransform: 'uppercase',
-          opacity: '0.6',
-          textAlign: 'center',
-          margin: '0 0 1rem',
-        }}>
-          Add record
-        </p>
+  // "Edit Character" / "Edit AU" / "Edit Post" all start with "Edit" —
+  // use that to drive the eyebrow label and submitting text, since
+  // editingId itself isn't passed down to this component.
+  const isEditing = title?.toLowerCase().startsWith('edit');
 
-        <h2 style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: '1.8rem',
-          textAlign: 'center',
-          margin: '0 0 1.5rem',
-          fontWeight: '600',
-        }}>
-          {title}
-        </h2>
+  // Fields can declare an explicit page ('left' | 'right'). If none do,
+  // fall back to the old positional split (identity fields left, rest right).
+  const hasExplicitPages = fields.some((f) => f.page);
+  let leftFields, rightFields;
+  if (hasExplicitPages) {
+    leftFields = fields.filter((f) => f.page !== 'right');
+    rightFields = fields.filter((f) => f.page === 'right');
+  } else {
+    const splitIndex = fields.length <= 4 ? 2 : 3;
+    leftFields = fields.slice(0, splitIndex);
+    rightFields = fields.slice(splitIndex);
+  }
 
-        {/* Dynamic fields */}
-        {fields.map((field) => (
-          <label
-            key={field.name}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '0.5rem',
-              marginBottom: '1rem',
-            }}
-          >
-            <span style={{
-              fontSize: '0.75rem',
-              textTransform: 'uppercase',
-              letterSpacing: '0.5px',
-              opacity: '0.65',
-            }}>
-              {field.label}
-            </span>
-            {field.type === 'select' ? (
-              <select
-                value={formData[field.name] || ''}
-                onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
-                style={{
-                  padding: '0.75rem',
-                  border: 'none',
-                  borderBottom: '1px solid var(--text-on-dark)',
-                  background: 'transparent',
-                  fontSize: '0.95rem',
-                  fontFamily: 'inherit',
-                  color: 'var(--text-on-light)',
-                }}
-              >
-                <option value="">Select...</option>
-                {field.options?.map((opt) => (
-                  <option key={opt} value={opt}>{opt}</option>
-                ))}
-              </select>
+  const addTag = (field, rawValue) => {
+    const value = rawValue.trim();
+    if (!value) return;
+    const current = Array.isArray(formData[field.name]) ? formData[field.name] : [];
+    if (current.includes(value)) return;
+    setFormData({ ...formData, [field.name]: [...current, value] });
+    setTagDrafts({ ...tagDrafts, [field.name]: '' });
+  };
+
+  const removeTag = (field, valueToRemove) => {
+    const current = Array.isArray(formData[field.name]) ? formData[field.name] : [];
+    setFormData({ ...formData, [field.name]: current.filter((v) => v !== valueToRemove) });
+  };
+
+  const handleTagKeyDown = (field, e) => {
+    if (e.key === 'Enter' || e.key === ',') {
+      e.preventDefault();
+      addTag(field, tagDrafts[field.name] || '');
+    } else if (e.key === 'Backspace' && !tagDrafts[field.name]) {
+      // Backspace on an empty input removes the last chip
+      const current = Array.isArray(formData[field.name]) ? formData[field.name] : [];
+      if (current.length > 0) removeTag(field, current[current.length - 1]);
+    }
+  };
+
+  const toggleAu = (field, auId) => {
+    const current = Array.isArray(formData[field.name]) ? formData[field.name] : [];
+    const next = current.includes(auId)
+      ? current.filter((id) => id !== auId)
+      : [...current, auId];
+    setFormData({ ...formData, [field.name]: next });
+  };
+
+  const renderField = (field) => {
+    if (field.type === 'textarea') {
+      return (
+        <label key={field.name} className="book-field">
+          <span>{field.label}</span>
+          <textarea
+            value={formData[field.name] || ''}
+            onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
+            placeholder={field.placeholder || ''}
+          />
+        </label>
+      );
+    }
+
+    if (field.type === 'tags') {
+      const chips = Array.isArray(formData[field.name]) ? formData[field.name] : [];
+      return (
+        <label key={field.name} className="book-field">
+          <span>{field.label}</span>
+          <div className="book-tags">
+            {chips.map((chip) => (
+              <span className="book-tag-chip" key={chip}>
+                {chip}
+                <button type="button" onClick={() => removeTag(field, chip)} aria-label={`Remove ${chip}`}>
+                  ×
+                </button>
+              </span>
+            ))}
+            <input
+              type="text"
+              value={tagDrafts[field.name] || ''}
+              onChange={(e) => setTagDrafts({ ...tagDrafts, [field.name]: e.target.value })}
+              onKeyDown={(e) => handleTagKeyDown(field, e)}
+              onBlur={() => addTag(field, tagDrafts[field.name] || '')}
+              placeholder={field.placeholder || 'Type and press Enter…'}
+            />
+          </div>
+        </label>
+      );
+    }
+
+    if (field.type === 'auChecklist') {
+      const selected = Array.isArray(formData[field.name]) ? formData[field.name] : [];
+      const options = field.options || [];
+      return (
+        <label key={field.name} className="book-field">
+          <span>{field.label}</span>
+          <div className="book-au-checklist">
+            {options.length === 0 ? (
+              <p className="book-au-checklist-empty">No AUs yet</p>
             ) : (
-              <input
-                type={field.type || 'text'}
-                value={formData[field.name] || ''}
-                onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
-                placeholder={field.placeholder || ''}
-                style={{
-                  padding: '0.75rem',
-                  border: 'none',
-                  borderBottom: '1px solid var(--text-on-dark)',
-                  background: 'transparent',
-                  fontSize: '0.95rem',
-                  fontFamily: 'inherit',
-                  color: 'var(--text-on-light)',
-                }}
-              />
+              options.map((au) => (
+                <label key={au.id}>
+                  <input
+                    type="checkbox"
+                    checked={selected.includes(au.id)}
+                    onChange={() => toggleAu(field, au.id)}
+                  />
+                  {au.title}
+                </label>
+              ))
             )}
-          </label>
-        ))}
+          </div>
+        </label>
+      );
+    }
 
-        {error && (
-          <p style={{
-            fontFamily: 'var(--font-label)',
-            fontSize: '0.75rem',
-            color: '#c55',
-            textAlign: 'center',
-            margin: '1rem 0',
-          }}>
-            {error}
-          </p>
-        )}
+    if (field.type === 'select') {
+      return (
+        <label key={field.name} className="book-field">
+          <span>{field.label}</span>
+          <select
+            value={formData[field.name] || ''}
+            onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
+          >
+            <option value="">Select...</option>
+            {field.options?.map((opt) => {
+              const optValue = typeof opt === 'object' ? opt.value : opt;
+              const optLabel = typeof opt === 'object' ? opt.label : opt;
+              return (
+                <option key={optValue} value={optValue}>{optLabel}</option>
+              );
+            })}
+          </select>
+        </label>
+      );
+    }
 
+    return (
+      <label key={field.name} className="book-field">
+        <span>{field.label}</span>
+        <input
+          type={field.type || 'text'}
+          value={formData[field.name] || ''}
+          onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
+          placeholder={field.placeholder || ''}
+        />
+      </label>
+    );
+  };
+
+  const modal = (
+    <div className="book-modal-overlay" onClick={handleOverlayClick}>
+      <form onSubmit={onSubmit} className="book-modal-cover">
         <button
-          type="submit"
-          disabled={isSubmitting}
-          style={{
-            width: '100%',
-            marginTop: '1.5rem',
-            background: 'transparent',
-            color: 'var(--text-on-dark)',
-            border: '1px solid var(--text-on-dark)',
-            padding: '0.75rem',
-            borderRadius: '2px',
-            fontSize: '0.95rem',
-            cursor: isSubmitting ? 'not-allowed' : 'pointer',
-            fontWeight: '500',
-            transition: 'all 0.2s ease',
-            opacity: isSubmitting ? '0.6' : '1',
-          }}
+          type="button"
+          className="book-modal-close"
+          onClick={onClose}
+          aria-label="Close"
         >
-          {isSubmitting ? 'Adding…' : submitButtonText}
+          ×
         </button>
+
+        <div className="book-modal-pages">
+          {/* Left page */}
+          <div className="book-page book-page--left">
+            <p className="book-eyebrow">{isEditing ? 'Edit record' : 'Add record'}</p>
+            <h2 className="book-title">{title}</h2>
+            <div className="book-title-rule" />
+            {leftFields.map(renderField)}
+          </div>
+
+          {/* Right page */}
+          <div className="book-page book-page--right">
+            {rightFields.map(renderField)}
+
+            {error && <p className="book-error">{error}</p>}
+
+            <button type="submit" className="book-submit" disabled={isSubmitting}>
+              {isSubmitting ? (isEditing ? 'Updating…' : 'Adding…') : submitButtonText}
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   );
+
+  return createPortal(modal, document.body);
 }
