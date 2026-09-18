@@ -1,0 +1,18 @@
+[
+  {
+    "id": "895e9f14-db36-44b8-9681-b5d98d8ea9f7",
+    "slug": "what-ifs-au",
+    "title": "What Ifs",
+    "description": "A snippet of what life would be like if the characters didn't die.",
+    "cover_image": null,
+    "created_at": "2026-08-16T06:27:22.65329+00:00"
+  },
+  {
+    "id": "8b31923e-9c16-41dd-82ad-b66bb8265b00",
+    "slug": "original-dimension",
+    "title": "Original Dimension",
+    "description": "Our real life",
+    "cover_image": null,
+    "created_at": "2026-08-21T07:54:30.252882+00:00"
+  }
+]

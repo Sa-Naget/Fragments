@@ -1,0 +1,92 @@
+[
+  {
+    "id": "b494acdf-7781-4e37-a340-b17c1965d895",
+    "slug": "magnum-harvey-viper",
+    "name": "Magnum Harvey Viper",
+    "short_bio": "Born with the name Harvey and live with the name Magnum. The representative of Viper on The Court of the Damned and The Government ",
+    "tags": [
+      "Representative"
+    ],
+    "avatar": null,
+    "generation": "10",
+    "fate_number": "081322-0110",
+    "family_name": "Viper",
+    "branding": "Viper-On",
+    "status": "Alive",
+    "age": "44",
+    "birthplace": "City of Vetrinka",
+    "current_residence": "Viper's Manor",
+    "hair_color": "Blonde",
+    "highlight": "Branding",
+    "eye_color": "Heterochromia (Cyan x Chartreuse)",
+    "height": "173 cm",
+    "skills": [
+      "Blessing of",
+      "Celestial Route",
+      "Blessing of Vidhika",
+      "Blessing of Shamarke"
+    ],
+    "tools": [
+      "Vectrum",
+      "Sun Dagger"
+    ],
+    "created_at": "2026-08-16T06:27:22.65329+00:00"
+  },
+  {
+    "id": "9630d48a-8925-45ad-bbf1-bf35a8391044",
+    "slug": "starlight-regal",
+    "name": "Star Light Regal",
+    "short_bio": "Usually called Star. The oldest son of Columbus Regal (father) and Rosetta Athe (mother). Has a surprisingly close relationship with Harvey Viper.",
+    "tags": [
+      "10G",
+      "bright",
+      "cheerful",
+      "responsible",
+      "main character"
+    ],
+    "avatar": null,
+    "generation": "10",
+    "fate_number": "181219-0110",
+    "family_name": "Regal",
+    "branding": "Viper's",
+    "status": "Alive",
+    "age": "23",
+    "birthplace": "Village of Reksana",
+    "current_residence": "Pyha Mountain",
+    "hair_color": "Lapis Blue",
+    "highlight": "Branding",
+    "eye_color": "Unknown",
+    "height": "184 cm",
+    "skills": [
+      "Eyes of the Sun",
+      "Eyes of the Moon"
+    ],
+    "tools": [
+      "Gate Target"
+    ],
+    "created_at": "2026-08-16T06:27:22.65329+00:00"
+  },
+  {
+    "id": "55cda8ef-0d29-488c-9f73-db2ad520fa78",
+    "slug": "alsa-sabichka",
+    "name": "Alsa Alas Sabichka",
+    "short_bio": null,
+    "tags": null,
+    "avatar": null,
+    "generation": "11",
+    "fate_number": "020012-2123",
+    "family_name": "Sabichka",
+    "branding": "Sabichka's",
+    "status": "Alive",
+    "age": "18",
+    "birthplace": "City of Bachira",
+    "current_residence": "St. Vensan",
+    "hair_color": "Ruby Red",
+    "highlight": "Vectrum",
+    "eye_color": "Ruby Red",
+    "height": "165 cm",
+    "skills": null,
+    "tools": null,
+    "created_at": "2026-08-21T07:53:29.596662+00:00"
+  }
+]
