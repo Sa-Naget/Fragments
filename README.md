@@ -2,7 +2,7 @@
 
 A little archive room for stray lore, filed characters, alternate universes, and the occasional sticky-note of a world that refuses to stay tidy.
 
-Built with React, Vite, and Supabase, this project turns a pile of fandom fragments into something browsable, searchable, and just a bit dramatic.
+Built with React, Vite, and Supabase, this project turns a pile of fandom fragments into something browsable, searchable, and just a bit dramatic. (˶˃𐃷˂˶)
 
 ## Structure ✦｡°✩
 
@@ -10,15 +10,15 @@ Built with React, Vite, and Supabase, this project turns a pile of fandom fragme
 fragments/
 ├── src/
 │   ├── components/            ← cards, layouts, admin UI, visual flourishes
-│   ├── data/                 ← local JSON seed data
-│   ├── lib/                 ← Supabase client + auth context
-│   ├── pages/                ← landing, archive, character pages, admin routes
-│   ├── utils/                ← tiny helpers and odd little fixes
-│   ├── App.jsx               ← route wiring and app shell
-│   ├── main.jsx              ← app bootstrap
-│   └── index.css             ← base styles and theme tokens
+│   ├── data/                  ← local JSON seed data
+│   ├── lib/                   ← Supabase client + auth context
+│   ├── pages/                 ← landing, archive, character pages, admin routes
+│   ├── utils/                 ← tiny helpers and odd little fixes
+│   ├── App.jsx                ← route wiring and app shell
+│   ├── main.jsx               ← app bootstrap
+│   └── index.css              ← base styles and theme tokens
 ├── public/
-│   └── images/               ← static imagery and media assets
+│   └── images/                ← static imagery and media assets
 ├── exports/                   ← exported JSON snapshots from Supabase
 ├── .env.example               ← copy to .env.local and fill in your keys
 ├── export-supabase.mjs        ← export data from Supabase to local JSON
@@ -73,7 +73,7 @@ If you're using the export script, the same keys are read from `.env.local`.
 - Gives admins a private dashboard for managing characters, AUs, and posts
 - Keeps the data layer centralized through Supabase instead of scattering it across random components
 
-## Routes ✧
+## Routes ✧ <(•_•<)
 
 - `/` — landing entrance
 - `/archive` — searchable archive of characters
@@ -121,7 +121,7 @@ Right now the archive is already doing the heavy lifting: browsing, searching, a
 - a cleaner backup / restore flow for exported data
 - optional content moderation or publishing states for drafts
 
-## Notes for the curious
+## Notes for the curious 𐔌՞ ܸ.ˬ.ܸ՞𐦯
 
 This project has a very specific mood: a cataloged universe where every fragment feels gently preserved, like a library of half-remembered worlds. If you're here to build on it, the main things to watch are:
 
@@ -133,5 +133,5 @@ Everything else is mostly atmosphere, paper labels, and a few well-placed dust m
 
 ---
 
-If you want, this repo can also be expanded with a more formal project-specific guide for data schema, admin usage, and contributor setup.
+If you want, this repo can also be expanded with a more formal project-specific guide for data schema, admin usage, and contributor setup. Have fun looking around ♡ ̆̈
 
